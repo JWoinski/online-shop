@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!--    <link rel="stylesheet" th:href="@{/Users/jakubwoinski/Documents/Zalando/src/main/resources/templates/style.css}"/>-->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header a {
+            text-decoration: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #left-panel {
+            background-color: #fff;
+            padding: 20px;
+            width: 40%;
+            min-width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container {
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Sklep Internetowy</title>
+</head>
+<body>
+
+<header>
+    <div>
+        <a th:href="@{/zalando/home}"><span>Zalando</span></a>
+    </div>
+</header>
+
+<main>
+    <div id="left-panel">
+        <div class="form-container">
+            <h2>Zarejestruj się</h2>
+            <form method="post" th:action="@{/zalando/register}" th:object="${user}">
+                <label>Imię:</label>
+                <input th:field="*{name}">
+                <label>Nazwisko:</label>
+                <input th:field="*{surname}">
+                <label>Email:</label>
+                <input th:field="*{email}">
+                <label>Hasło:</label>
+                <input th:field="*{password}" type="password">
+                <button type="submit">Zarejestruj się</button>
+            </form>
+        </div>
+
+        <div class="form-container">
+            <h2>Zaloguj się</h2>
+            <form method="post" th:action="@{/zalando/login}" th:object="${user}">
+                <label>Email:</label>
+                <input th:field="*{email}">
+                <label>Hasło:</label>
+                <input th:field="*{password}" type="password">
+                <button type="submit">Zaloguj się</button>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    How to become 15k Java Software Developer in 48h, no scam 100% quality
+</footer>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    header {
+              background-color: #333;
+              color: #fff;
+              padding: 10px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          header a {
+              text-decoration: none;
+              color: #fff;
+              cursor: pointer;
+          }
+
+    a {
+    text-decoration: none;
+              color: black;
+              cursor: pointer;
+    }
+
+    main {
+        display: flex;
+        flex: 1;
+    }
+
+    #left-panel {
+        background-color: #eee;
+        padding: 20px;
+        width: 20%;
+        min-width: 200px;
+        position: relative;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+    #right-panel {
+        flex: 1;
+        padding: 20px;
+    }
+
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+
+    .search-bar input[type="search"] {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .search-bar button[type="submit"] {
+        width: 100%;
+        padding: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!--    <link rel="stylesheet" th:href="@{/Users/jakubwoinski/Documents/Zalando/src/main/resources/templates/style.css}"/>-->
+    <title>Sklep Internetowy</title>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <a th:href="@{/zalando/home}"><span>Zalando</span></a>
+    </div>
+    <div>
+        <a th:href="@{/zalando/basket}"><span>Koszyk</span></a>
+        |
+        <a th:href="@{/zalando/registerForm}"><span>Zaloguj się</span></a>
+    </div>
+</header>
+
+<main>
+    <div id="left-panel">
+        <div class="search-bar">
+            <form action="/zalando/search" method="get">
+                <label>
+                    <input name="name" placeholder="Szukaj..." type="search"/>
+                </label>
+                <button type="submit">Szukaj</button>
+            </form>
+        </div>
+
+        <label for="category">Wybierz kategorię:</label>
+        <form method="get" th:action="@{/zalando/filter}">
+            <select id="category" name="filter">
+                <option value="all">Wszystkie</option>
+                <option value="clothing">Koszulki</option>
+                <option value="pants">Spodnie</option>
+                <option value="accessories">Akcesoria</option>
+                <option value="shoes">Buty</option>
+            </select><br><br>
+
+            <button type="submit">Filtruj</button>
+        </form>
+
+        <label for="sort">Sortuj według:</label>
+        <form method="get" th:action="@{/zalando/sort}">
+            <select id="sort" name="sort">
+                <option value="name_asc">Nazwa od A do Z</option>
+                <option value="name_desc">Nazwa od Z do A</option>
+                <option value="price_asc">Cena rosnąco</option>
+                <option value="price_desc">Cena malejąco</option>
+            </select><br><br>
+            <button type="submit">Sortuj</button>
+        </form>
+    </div>
+
+    <div id="right-panel">
+        <div class="product" th:each="product : ${entities}">
+            <div class="product-details">
+                <a th:href="@{'product/' + ${product.productId}}">
+                    <h3 th:text="${product.name}"></h3>
+                    <p th:text="'Cena: ' + ${product.price}"></p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    How to become 15k Java Software Developer in 48h, no scam 100% quality
+</footer>
+
+</body>
+</html>

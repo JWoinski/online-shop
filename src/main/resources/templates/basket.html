@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!--    <link rel="stylesheet" th:href="@{/Users/jakubwoinski/Documents/Zalando/src/main/resources/templates/style.css}"/>-->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header a {
+            text-decoration: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #basket {
+            background-color: #fff;
+            padding: 20px;
+            width: 40%;
+            min-width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Koszyk</title>
+</head>
+<body>
+
+<header>
+    <div><a th:href="@{/zalando/home}"><span>Zalando</span></a></div>
+</header>
+
+<main>
+    <div id="basket">
+        <h2>Twój koszyk</h2>
+
+        <th:block th:each="basketProduct: ${basketProducts}">
+            <form method="post" th:action="@{/zalando/updateBasket}" th:object="${basketProduct}">
+                <input name="productId" th:value="${basketProduct.product.productId}" type="hidden">
+                <div class="product">
+                    <p th:text="'Produkt: ' + ${basketProduct.product.name}"></p>
+                    <p th:text="'Cena: ' + ${basketProduct.product.price} + ' Ilość: ' + ${basketProduct.quantity}"></p>
+
+                    <button name="action" th:value="'increase:'" type="submit">Zwiększ ilość</button>
+                    <button name="action" th:value="'decrease:'" type="submit">Zmniejsz ilość</button>
+                    <button name="action" th:value="'remove:'" type="submit">Usuń</button>
+                </div>
+            </form>
+        </th:block>
+
+        <p th:text="'Suma: ' + ${totalSum}"></p>
+    </div>
+
+</main>
+
+<footer>
+    How to become 15k Java Software Developer in 48h, no scam 100% quality
+</footer>
+
+</body>
+</html>
