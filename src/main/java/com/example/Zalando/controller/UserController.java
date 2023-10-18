@@ -2,7 +2,7 @@ package com.example.Zalando.controller;
 
 import com.example.Zalando.model.User;
 import com.example.Zalando.service.ProductService;
-import com.example.Zalando.service.UserService;
+import com.example.Zalando.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,19 +25,17 @@ public class UserController {
         return "register";
     }
 
+    @GetMapping("/loginForm")
+    public String showloginForm(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "login";
+    }
+
     @PostMapping("/register")
     public String register(Model model, @ModelAttribute("User") User user) {
         userService.saveUserToDB(user);
-        model.addAttribute("entities", productService.getAllProducts());
-
-        return "home";
-    }
-
-    @PostMapping("/login")
-    public String login(Model model, @ModelAttribute("User") User user) {
-        userService.loginUser(user);
-        model.addAttribute("entities", productService.getAllProducts());
-
+        model.addAttribute("products", productService.getAllProducts());
         return "home";
     }
 }

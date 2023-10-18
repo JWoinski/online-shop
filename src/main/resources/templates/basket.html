@@ -78,9 +78,9 @@
                     <p th:text="'Produkt: ' + ${basketProduct.product.name}"></p>
                     <p th:text="'Cena: ' + ${basketProduct.product.price} + ' Ilość: ' + ${basketProduct.quantity}"></p>
 
-                    <button name="action" th:value="'increase:'" type="submit">Zwiększ ilość</button>
-                    <button name="action" th:value="'decrease:'" type="submit">Zmniejsz ilość</button>
-                    <button name="action" th:value="'remove:'" type="submit">Usuń</button>
+                    <button name="action" th:value="'increase'" type="submit" th:attr="disabled=${basketProduct.quantity >= basketProduct.product.quantity} ? true : false">Zwiększ ilość</button>
+                    <button name="action" th:value="'decrease'" type="submit" th:attr="disabled=${basketProduct.quantity <= 1} ? true : false">Zmniejsz ilość</button>
+                    <button name="action" th:value="'remove'" type="submit">Usuń</button>
                 </div>
             </form>
         </th:block>

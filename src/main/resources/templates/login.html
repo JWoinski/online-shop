@@ -15,20 +15,6 @@
             background-color: #f5f5f5;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header a {
-            text-decoration: none;
-            color: #fff;
-            cursor: pointer;
-        }
-
         main {
             display: flex;
             flex: 1;
@@ -43,6 +29,24 @@
             min-width: 300px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            display: flex;
+            flex-direction: column; /* Dodaj tę linię, aby elementy wewnątrz były ustawione jeden pod drugim */
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #fff;
+            cursor: pointer;
         }
 
         .form-container {
@@ -104,36 +108,21 @@
 <main>
     <div id="left-panel">
         <div class="form-container">
-            <h2>Zarejestruj się</h2>
-            <form method="post" th:action="@{/zalando/register}" th:object="${user}">
-                <label>Imię:</label>
-                <input th:field="*{name}">
-                <label>Nazwisko:</label>
-                <input th:field="*{surname}">
+            <h2>Zaloguj się</h2>
+            <form method="post" th:action="@{/zalando/login}" th:object="${user}">
                 <label>Email:</label>
                 <input th:field="*{email}">
                 <label>Hasło:</label>
                 <input th:field="*{password}" type="password">
-                <button type="submit">Zarejestruj się</button>
+                <button type="submit">Zaloguj się</button>
             </form>
         </div>
-
-<!--        <div class="form-container">-->
-<!--            <h2>Zaloguj się</h2>-->
-<!--            <form method="post" th:action="@{/zalando/login}" th:object="${user}">-->
-<!--                <label>Email:</label>-->
-<!--                <input th:field="*{email}">-->
-<!--                <label>Hasło:</label>-->
-<!--                <input th:field="*{password}" type="password">-->
-<!--                <button type="submit">Zaloguj się</button>-->
-<!--            </form>-->
-<!--        </div>-->
     </div>
-
 </main>
 
 <footer>
     How to become 15k Java Software Developer in 48h, no scam 100% quality
 </footer>
+
 </body>
 </html>

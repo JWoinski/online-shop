@@ -1,5 +1,6 @@
-package com.example.Zalando.model;
+package com.example.Zalando.model.basket;
 
+import com.example.Zalando.model.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

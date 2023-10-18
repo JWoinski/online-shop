@@ -1,4 +1,4 @@
-package com.example.Zalando.service.repository;
+package com.example.Zalando.repository;
 
 import com.example.Zalando.model.Opinion;
 import org.springframework.data.jpa.repository.JpaRepository;

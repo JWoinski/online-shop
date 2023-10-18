@@ -1,8 +1,9 @@
 package com.example.Zalando.controller;
 
-import com.example.Zalando.model.BasketProduct;
-import com.example.Zalando.service.BasketProductService;
-import com.example.Zalando.service.BasketService;
+import com.example.Zalando.model.basket.BasketProduct;
+import com.example.Zalando.service.basket.BasketProductService;
+import com.example.Zalando.service.basket.BasketQuantityManager;
+import com.example.Zalando.service.basket.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class BasketController {
     private final BasketProductService basketProductService;
     private final BasketService basketService;
     private final ProductDetailsController productDetailsController;
+    private final BasketQuantityManager basketQuantityManager;
 
     @GetMapping("/basket")
     public String viewBasket(Model model) {
@@ -38,10 +40,11 @@ public class BasketController {
         basketProductService.addToBasket(productId, quantity);
         return productDetailsController.showProductDetails(productId, model);
     }
+
     @PostMapping("/updateBasket")
     public String updateBasket(@RequestParam("productId") int productId,
                                @RequestParam String action) {
-        basketProductService.updateBasket(productId, action);
+        basketQuantityManager.updateBasket(productId, action);
         return "redirect:/zalando/basket";
     }
 }

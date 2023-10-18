@@ -80,6 +80,32 @@
         margin-top: 5px;
         cursor: pointer;
     }
+    #pagination {
+    margin-top: 20px;
+}
+
+#pagination ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+#pagination li {
+    margin-right: 5px;
+}
+
+#pagination li a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+}
+
+#pagination li.active a {
+    background-color: #333;
+    color: #fff;
+}
 </style>
 
 <head>
@@ -98,7 +124,10 @@
     <div>
         <a th:href="@{/zalando/basket}"><span>Koszyk</span></a>
         |
-        <a th:href="@{/zalando/registerForm}"><span>Zaloguj się</span></a>
+        <a th:href="@{/zalando/registerForm}"><span>Zarejestruj się</span></a>|
+        <a th:href="@{/zalando/loginForm}"><span>Zaloguj się</span></a>
+</span>
+</span>
     </div>
 </header>
 
@@ -139,7 +168,7 @@
     </div>
 
     <div id="right-panel">
-        <div class="product" th:each="product : ${entities}">
+        <div class="product" th:each="product : ${products}">
             <div class="product-details">
                 <a th:href="@{'product/' + ${product.productId}}">
                     <h3 th:text="${product.name}"></h3>
@@ -148,7 +177,19 @@
             </div>
         </div>
     </div>
-
+<!--    <div id="pagination">-->
+<!--        <ul>-->
+<!--            <li th:unless="${currentPage == 0}">-->
+<!--                <a th:href="@{/zalando/home?page=(currentPage - 1)}">Poprzednia</a>-->
+<!--            </li>-->
+<!--            <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageNumber == currentPage ? 'active' : ''}">-->
+<!--                <a th:href="@{/zalando/home?page=pageNumber}" th:text="${pageNumber + 1}"></a>-->
+<!--            </li>-->
+<!--            <li th:unless="${currentPage == totalPages - 1}">-->
+<!--                <a th:href="@{/zalando/home?page=(currentPage + 1)}">Następna</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
 </main>
 
 <footer>

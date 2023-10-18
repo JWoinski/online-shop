@@ -1,7 +1,7 @@
 package com.example.Zalando.service;
 
 import com.example.Zalando.model.Product;
-import com.example.Zalando.service.repository.ProductRepository;
+import com.example.Zalando.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -83,23 +83,30 @@ class ProductServiceTest {
 
         when(productRepository.findAll()).thenReturn(mockProducts);
 
+        when(productRepository.findAllByOrderByNameAsc()).thenReturn(mockProducts); // adjust this based on your actual repository methods
+        when(productRepository.findAllByOrderByNameDesc()).thenReturn(mockProducts); // adjust this based on your actual repository methods
+
+        // Act
         List<Product> result = productService.sortProducts("name_asc");
 
         mockProducts.sort(Comparator.comparing(Product::getName));
+
         assertEquals(mockProducts, result);
     }
+
 
     @Test
     void getProductById_shouldReturnProduct() {
         int productId = 0;
         Product mockProduct = new Product("Clothing", "Shirt", "Description", 20.0, 10, "Shirt1");
 
-        when(productRepository.findByProductId(productId)).thenReturn(mockProduct);
+        when(productRepository.findById(productId)).thenReturn(Optional.of(mockProduct));
 
         Product result = productService.getProductById(productId);
 
         assertEquals(mockProduct, result);
-        verify(productRepository, times(1)).findByProductId(productId);
+
+        verify(productRepository, times(1)).findById(productId);
     }
 
 

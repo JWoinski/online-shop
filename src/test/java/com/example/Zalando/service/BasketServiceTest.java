@@ -1,7 +1,9 @@
 package com.example.Zalando.service;
 
-import com.example.Zalando.model.BasketProduct;
+import com.example.Zalando.model.basket.BasketProduct;
 import com.example.Zalando.model.Product;
+import com.example.Zalando.repository.BasketRepository;
+import com.example.Zalando.service.basket.BasketService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -15,7 +17,8 @@ public class BasketServiceTest {
 
     @Test
     void calculateTotal_shouldReturnCorrectTotal() {
-        BasketService basketService = new BasketService();
+        BasketRepository mockBasketRepository = mock(BasketRepository.class);
+        BasketService basketService = new BasketService(mockBasketRepository);
 
         Product mockProduct1 = mock(Product.class);
         when(mockProduct1.getPrice()).thenReturn(20.0);
@@ -40,7 +43,8 @@ public class BasketServiceTest {
 
     @Test
     void calculateTotal_shouldReturnZeroForEmptyBasket() {
-        BasketService basketService = new BasketService();
+        BasketRepository mockBasketRepository = mock(BasketRepository.class);
+        BasketService basketService = new BasketService(mockBasketRepository);
         List<BasketProduct> emptyBasket = List.of();
 
         double total = basketService.calculateTotal(emptyBasket);

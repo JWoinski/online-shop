@@ -1,6 +1,6 @@
 package com.example.Zalando.service;
 
-import com.example.Zalando.service.repository.OpinionRepository;
+import com.example.Zalando.repository.OpinionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

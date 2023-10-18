@@ -1,5 +1,6 @@
-package com.example.Zalando.model;
+package com.example.Zalando.model.basket;
 
+import com.example.Zalando.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +18,9 @@ public class Basket {
     @JoinColumn(name = "user_id")
     private User user;
     private String flag;
+
+    public Basket(String flag, User user) {
+        this.flag = flag;
+        this.user = user;
+    }
 }

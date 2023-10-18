@@ -1,7 +1,7 @@
-package com.example.Zalando.service.repository;
+package com.example.Zalando.repository;
 
-import com.example.Zalando.model.Basket;
-import com.example.Zalando.model.BasketProduct;
+import com.example.Zalando.model.basket.Basket;
+import com.example.Zalando.model.basket.BasketProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

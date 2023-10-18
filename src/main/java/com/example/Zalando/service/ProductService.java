@@ -1,13 +1,13 @@
 package com.example.Zalando.service;
 
 import com.example.Zalando.model.Product;
-import com.example.Zalando.service.repository.ProductRepository;
+import com.example.Zalando.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,41 +32,38 @@ public class ProductService {
         };
     }
 
+    //TODO filter and sort must work together
     public List<Product> sortProducts(String sortOption) {
         List<Product> sortedProducts;
-
         String[] parts = sortOption.split("_");
         String sortBy = parts[0];
         String sortOrder = parts[1];
         sortedProducts = productRepository.findAll();
-        //TODO SORTED FROM SQL
         switch (sortBy) {
             case "name" -> {
-//                sortedProducts = productRepository.findAll();
                 if ("asc".equals(sortOrder)) {
                     return productRepository.findAllByOrderByNameAsc();
-//                    sortedProducts.sort(Comparator.comparing(Product::getName));
-                }
-                else {
+                } else {
                     return productRepository.findAllByOrderByNameDesc();
-//                    sortedProducts.sort(Comparator.comparing(Product::getName).reversed());
                 }
             }
             case "price" -> {
-//                sortedProducts = productRepository.findAll();
                 if ("asc".equals(sortOrder)) {
                     return productRepository.findAllByOrderByPriceAsc();
-//                    sortedProducts.sort(Comparator.comparing(Product::getPrice));
                 } else {
                     return productRepository.findAllByOrderByPriceDesc();
-//                    sortedProducts.sort(Comparator.comparing(Product::getPrice).reversed());
                 }
             }
-
         }
         return sortedProducts;
     }
+
     public Product getProductById(int productId) {
         return productRepository.findById(productId).orElse(null);
+    }
+
+    //todo pagination
+    public Page<Product> getAllProductsPaginated(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 }

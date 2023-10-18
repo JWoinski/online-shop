@@ -1,27 +1,22 @@
-package com.example.Zalando.service.repository;
+package com.example.Zalando.repository;
 
 import com.example.Zalando.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByNameContaining(String text);
 
-    List<Product> findByOrderByName();
-
-    List<Product> findByOrderByNameDesc();
-
-    List<Product> findByOrderByPrice();
-
-    List<Product> findByOrderByPriceDesc();
-
     List<Product> findByCategoryName(String clothing);
 
-    Product findByProductId(int productId);
-
     List<Product> findAllByOrderByPriceAsc();
+
     List<Product> findAllByOrderByPriceDesc();
+
     List<Product> findAllByOrderByNameAsc();
+
     List<Product> findAllByOrderByNameDesc();
 }
